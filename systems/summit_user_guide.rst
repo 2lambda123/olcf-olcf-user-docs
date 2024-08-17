@@ -51,7 +51,7 @@ bricks, each capable of a 25GB/s transfer rate in each direction.
 Most Summit nodes contain 512 GB of DDR4 memory for use by the POWER9
 processors, 96 GB of High Bandwidth Memory (HBM2) for use by the accelerators,
 and 1.6TB of non-volatile memory that can be used as a burst buffer. A small
-number of nodes (54) are configured as "high memory" nodes. These nodes contain 2TB of 
+number of nodes (54) are configured as "high memory" nodes. These nodes contain 2TB of
 DDR4 memory, 192GB of HBM2, and 6.4TB of non-volatile memory.
 
 The POWER9 processor is built around IBM’s SIMD
@@ -325,7 +325,7 @@ sub-command can be used as summarized in the following table.
 | module spider <string>                 | Searches for modulefiles containing <string>                                       |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
- 
+
 
 Defining custom module collections
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -875,7 +875,7 @@ the flag is accepted, and multiple ``alloc_flags`` values should be enclosed in
 quotes and space-separated. For example, ``-alloc_flags "gpumps smt1``.
 
 The most common values (``smt{1,2,4}``, ``gpumps``, ``gpudefault``) are detailed in
-the following sections. 
+the following sections.
 
 This option can also be used to provide additional resources to GPFS service
 processes, described in the `GPFS System Service Isolation
@@ -927,7 +927,7 @@ simultaneously. To change the compute mode to ``DEFAULT``, use the
 
 NVIDIA recommends using the ``EXCLUSIVE_PROCESS`` compute mode (the default on
 Summit) when using the Multi-Process Service, but both MPS and the compute mode
-can be changed by providing both values: ``-alloc_flags "gpumps gpudefault"``. 
+can be changed by providing both values: ``-alloc_flags "gpumps gpudefault"``.
 
 Batch Environment Variables
 ---------------------------
@@ -1121,10 +1121,10 @@ flag can be used at submit time.
 ``debug`` Queue Policy
 """"""""""""""""""""""""""
 
-The ``debug`` queue can be used to access Summit's compute resources for short 
+The ``debug`` queue can be used to access Summit's compute resources for short
 non-production debug tasks.  The queue provides a higher priority compared
-to jobs of the same job size bin in production queues.  Production work and 
-job chaining in the debug queue is prohibited.  Each user is limited to one 
+to jobs of the same job size bin in production queues.  Production work and
+job chaining in the debug queue is prohibited.  Each user is limited to one
 job in any state in the debug queue at any one point. Attempts to submit multiple
 jobs to the debug queue will be rejected upon job submission.
 
@@ -1693,7 +1693,7 @@ to finish before the job ends.
     #BSUB -J RunSim123
     #BSUB -o RunSim123.%J
     #BSUB -e RunSim123.%J
-    
+
     cd $MEMBERWORK/abc123
     jsrun <options> ./a.out &
     jsrun <options> ./a.out &
@@ -1707,7 +1707,7 @@ a batch node, where a single user is only permitted 4096 simultaneous
 processes. This limit is per user on each batch node, not per batch job.
 
 Each job step will create 3 processes, and JSM management may create up to ~23
-processes. This creates an upper-limit of ~1350 simultaneous job steps. 
+processes. This creates an upper-limit of ~1350 simultaneous job steps.
 
 If JSM or PMIX errors occur as the result of backgrounding many job steps, using the
 ``--immediate`` option to ``jsrun`` may help, as shown in the following example.
@@ -1721,10 +1721,10 @@ If JSM or PMIX errors occur as the result of backgrounding many job steps, using
     #BSUB -J RunSim123
     #BSUB -o RunSim123.%J
     #BSUB -e RunSim123.%J
-    
+
     cd $MEMBERWORK/abc123
     jsrun <options> --immediate ./a.out
-    jsrun <options> --immediate ./a.out 
+    jsrun <options> --immediate ./a.out
     jsrun <options> --immediate ./a.out
 
 
@@ -1771,7 +1771,7 @@ Job Step Viewer
 """""""""""""""
 
 `Job Step Viewer <https://jobstepviewer.olcf.ornl.gov/>`__ provides a graphical view of an application's runtime layout on Summit.
-It allows users to preview and quickly iterate with multiple ``jsrun`` options to 
+It allows users to preview and quickly iterate with multiple ``jsrun`` options to
 understand and optimize job launch.
 
 For bug reports or suggestions, please email help@olcf.ornl.gov.
@@ -2591,7 +2591,7 @@ HBM2
 ----
 
 Each V100 has access to 16 GB (32GB for high-memory nodes) of
-high-bandwidth memory (HBM2), which can be accessed at speeds of 
+high-bandwidth memory (HBM2), which can be accessed at speeds of
 up to 900 GB/s. Access to this memory is controlled by (8) 512-bit
 memory controllers, and all accesses to the high-bandwidth memory
 go through the 6 MB L2 cache.
@@ -3065,7 +3065,7 @@ follows:
 
   [  compute_gemm, 2019-Aug-08 12:48:39, Context 1, Stream 7
         Section: Command line profiler metrics
-        ---------------------------------------------------------------------- 
+        ----------------------------------------------------------------------
         sm__pipe_tensor_cycles_active.avg.pct_of_peak_sustained_active                    %                       43.44
         ----------------------------------------------------------------------
 
@@ -3176,7 +3176,7 @@ Tesla V100 Specifications
 | Maximum number of MPS clients                      | 48                         |
 +----------------------------------------------------+----------------------------+
 
- 
+
 
 Further Reading
 ---------------
@@ -3272,7 +3272,7 @@ assumed that the files are saved in the user's GPFS scratch area,
 well. Do not forget that for all the commands on NVMe, it is required to use
 jsrun. This will submit a job to run on one node.
 
-**Job submssion script: check_nvme.lsf.** 
+**Job submssion script: check_nvme.lsf.**
 
 .. code::
 
@@ -3376,7 +3376,7 @@ on Summit (`slides
 <https://www.olcf.ornl.gov/wp-content/uploads/2018/12/summit_workshop_BB_markomanolis.pdf>`__,
 `video <https://vimeo.com/306890779>`__) Summit Burst Buffer Libraries (`slides
 <https://www.olcf.ornl.gov/wp-content/uploads/2018/12/summit_workshop_BB_zimmer.pdf>`__,
-`video <https://vimeo.com/306891012>`__). 
+`video <https://vimeo.com/306891012>`__).
 
 .. _spectral-library:
 
@@ -3487,12 +3487,12 @@ will end up in a blocked state. This is true for both interactive jobs and jobs
 submitted with a batch script, but interactive jobs will hang without dropping
 you into your interactive shell. In both cases, JSM log files (e.g.,
 ``jsm-lsf-wait.username.1004985.log``) will be created in the location set for
-``TMPDIR`` containing the same error message as shown above. 
+``TMPDIR`` containing the same error message as shown above.
 
 Segfault when running executables on login nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Executing a parallel binary on the login node or a batch node without using the
-job step launcher ``jsrun`` will result in a segfault. 
+job step launcher ``jsrun`` will result in a segfault.
 
 This also can be encountered when importing parallel Python libraries like
 ``mpi4py`` and ``h5py`` directly on these nodes.
@@ -3509,7 +3509,7 @@ you may see an error message in Spectrum MPI that aborts the program:
 ::
 
    jsrun -n 1 -a 1 -g 1 nv-nsight-cu-cli ./a.out
-   
+
    Error: common_pami.c:1049 - ompi_common_pami_init() Unable to create PAMI client (rc=1)
    --------------------------------------------------------------------------
    No components were able to be opened in the pml framework.
@@ -3528,7 +3528,7 @@ This is due to an incompatibility in the 2019.x versions of Nsight Compute with
 Spectrum MPI. As a workaround, you can disable CUDA hooks in Spectrum MPI using
 
 ::
-   
+
    jsrun -n 1 -a 1 -g 1 --smpiargs="-disable_gpu_hooks" nv-nsight-cu-cli ./a.out
 
 Unfortunately, this is incompatible with using CUDA-aware MPI in your application.
@@ -3822,7 +3822,7 @@ Simultaneous backgrounded jsruns (Resolved: May 21, 2019)
 
 We have seen occasional errors from batch jobs with multiple
 simultaneous backgrounded jsrun commands. Jobs may see pmix errors
-during the noted failures. 
+during the noted failures.
 
 --------------
 
