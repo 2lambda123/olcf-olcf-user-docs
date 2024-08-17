@@ -11,7 +11,7 @@ Frontier User Guide
 
   Notable differences between Summit and Frontier:
 
-  Orion scratch filesystem 
+  Orion scratch filesystem
     Frontier mounts Orion, a parallel filesystem based on Lustre and HPE ClusterStor, with a 679 PB usable namespace. Frontier will not mount Alpine and Summit will not mount Orion. Data will not be automatically transferred from Alpine to Orion, so we recommend that users move only needed data between the file systems with Globus.
 
     See the :ref:`frontier-data-storage` section for more information.
@@ -40,7 +40,7 @@ Frontier User Guide
     Frontier uses Slurm's job launcher, ``srun``, instead of Summit's ``jsrun`` to launch parallel jobs within a batch script.  Overall functionality is similar, but commands are notably different. Frontier's :ref:`compute node layout <frontier-simple>` should also be considered when selecting job layout.
 
     See the :ref:`frontier-srun` section for more ``srun`` information, and see :ref:`frontier-mapping` for ``srun`` examples on Frontier.
-    
+
 
 
 System Overview
@@ -74,7 +74,7 @@ Each Frontier compute node consists of [1x] 64-core AMD "Optimized 3rd Gen EPYC"
 
     * hardware threads 000-007, 064-071 | GPU 4
     * hardware threads 008-015, 072-079 | GPU 5
-    
+
     NUMA 1:
 
     * hardware threads 016-023, 080-087 | GPU 2
@@ -127,7 +127,7 @@ The Frontier nodes are connected with [4x] HPE Slingshot 200 Gbps (25 GB/s) NICs
 File Systems
 ------------
 
-Frontier is connected to Orion, a parallel filesystem based on Lustre and HPE ClusterStor, with a 679 PB usable namespace (``/lustre/orion/``). In addition to Frontier, Orion is available on the OLCF's data transfer nodes, Andes, and some other smaller resources. It is not available from Summit. Data will not be automatically transferred from Alpine to Orion. Frontier also has access to the center-wide NFS-based filesystem (which provides user and project home areas). Each compute node has two 1.92TB Non-Volatile Memory storage devices. See :ref:`frontier-data-storage` for more information. 
+Frontier is connected to Orion, a parallel filesystem based on Lustre and HPE ClusterStor, with a 679 PB usable namespace (``/lustre/orion/``). In addition to Frontier, Orion is available on the OLCF's data transfer nodes, Andes, and some other smaller resources. It is not available from Summit. Data will not be automatically transferred from Alpine to Orion. Frontier also has access to the center-wide NFS-based filesystem (which provides user and project home areas). Each compute node has two 1.92TB Non-Volatile Memory storage devices. See :ref:`frontier-data-storage` for more information.
 
 Frontier connects to the center’s High Performance Storage System (HPSS) - for user and project archival storage - users can log in to the :ref:`dtn-user-guide` to move data to/from HPSS.
 
@@ -164,14 +164,14 @@ Data and Storage
 Transition from Alpine to Orion
 -------------------------------
 
-* Frontier mounts Orion, a parallel filesystem based on Lustre and HPE ClusterStor, with a 679 PB usable namespace (/lustre/orion/). In addition to Frontier, Orion is available on the OLCF's data transfer nodes, Andes, and some other smaller resources. It is not available from Summit. Frontier will not mount Alpine when Orion is in production. 
-* Data will not be automatically transferred from Alpine to Orion. Users should consider the data needed from Alpine and transfer it. Globus is the preferred method and there is access to both Orion and Alpine through the Globus OLCF DTN endpoint. See :ref:`data-transferring-data-globus`. Use of HPSS to specifically stage data for the Alpine to Orion transfer is discouraged. 
-* On Alpine, there was no user-exposed concept of file striping, the process of dividing a file between the storage elements of the filesystem. Orion uses a feature called Progressive File Layout (PFL) that changes the striping of files as they grow. Because of this, we ask users not to manually adjust the file striping. If you feel the default striping behavior of Orion is not meeting your needs, please contact help@olcf.ornl.gov. 
-* As with Alpine, files older than 90 days are purged from Orion.  Please plan your data management and lifecycle at OLCF before generating the data. 
+* Frontier mounts Orion, a parallel filesystem based on Lustre and HPE ClusterStor, with a 679 PB usable namespace (/lustre/orion/). In addition to Frontier, Orion is available on the OLCF's data transfer nodes, Andes, and some other smaller resources. It is not available from Summit. Frontier will not mount Alpine when Orion is in production.
+* Data will not be automatically transferred from Alpine to Orion. Users should consider the data needed from Alpine and transfer it. Globus is the preferred method and there is access to both Orion and Alpine through the Globus OLCF DTN endpoint. See :ref:`data-transferring-data-globus`. Use of HPSS to specifically stage data for the Alpine to Orion transfer is discouraged.
+* On Alpine, there was no user-exposed concept of file striping, the process of dividing a file between the storage elements of the filesystem. Orion uses a feature called Progressive File Layout (PFL) that changes the striping of files as they grow. Because of this, we ask users not to manually adjust the file striping. If you feel the default striping behavior of Orion is not meeting your needs, please contact help@olcf.ornl.gov.
+* As with Alpine, files older than 90 days are purged from Orion.  Please plan your data management and lifecycle at OLCF before generating the data.
 
 For more detailed information about center-wide file systems and data archiving available on Frontier, please refer to the pages on :ref:`data-storage-and-transfers`. The subsections below give a quick overview of NFS, Lustre,and HPSS storage spaces as well as the on node NVMe "Burst Buffers" (SSDs).
 
-NFS Filesystem 
+NFS Filesystem
 --------------
 
 +---------------------+---------------------------------------------+----------------+-------------+--------+---------+---------+------------+------------------+
@@ -185,14 +185,14 @@ NFS Filesystem
 
 .. note::
 
-    Though the NFS filesystem's User Home and Project Home areas are read/write from Frontier's compute nodes, 
-    we strongly recommend that users launch and run jobs from the Lustre Orion parallel filesystem 
-    instead due to its larger storage capacity and superior performance. Please see below for Lustre 
+    Though the NFS filesystem's User Home and Project Home areas are read/write from Frontier's compute nodes,
+    we strongly recommend that users launch and run jobs from the Lustre Orion parallel filesystem
+    instead due to its larger storage capacity and superior performance. Please see below for Lustre
     Orion filesystem storage areas and paths.
 
 
 
-Lustre Filesystem 
+Lustre Filesystem
 -----------------
 
 +---------------------+----------------------------------------------+------------------------+-------------+--------+---------+---------+------------+------------------+
@@ -355,11 +355,11 @@ We will be using these terms interchangeably as they refer to the same concepts 
 programming, with the exception that we will only be using "wavefront" (which refers to a
 unit of 64 threads) instead of "warp" (which refers to a unit of 32 threads) as they mean
 different things.
-  
+
 Blocks (workgroups), Threads (work items), Grids, Wavefronts
 ------------------------------------------------------------
 
-  
+
 
 When kernels are launched on a GPU, a "grid" of thread blocks are created, where the
 number of thread blocks in the grid and the number of threads within each block are
@@ -400,7 +400,7 @@ as a whole executes the instruction over 4 cycles, 16 threads per cycle. Since o
 wavefronts occupy the other three SIMD units at the same time, the total throughput still
 remains 1 instruction per cycle. Each CU maintains an instructions buffer for 10
 wavefronts and also maintains 256 registers where each register is 64 4-byte wide
-entries. 
+entries.
 
 
 .. _amd-hip:
@@ -515,7 +515,7 @@ The MPI implementation available on Frontier is Cray's MPICH, which is "GPU-awar
 ----
 
 
-  
+
 .. _frontier-compilers:
 
 Compiling
@@ -559,10 +559,10 @@ Cray Programming Environment and Compiler Wrappers
 
 Cray provides ``PrgEnv-<compiler>`` modules (e.g., ``PrgEnv-cray``) that load compatible components of a specific compiler toolchain. The components include the specified compiler as well as MPI, LibSci, and other libraries. Loading the ``PrgEnv-<compiler>`` modules also defines a set of compiler wrappers for that compiler toolchain that automatically add include paths and link in libraries for Cray software. Compiler wrappers are provided for C (``cc``), C++ (``CC``), and Fortran (``ftn``).
 
-For example, to load the AMD programming environment, do: 
+For example, to load the AMD programming environment, do:
 
 .. code:: bash
-    
+
     module load PrgEnv-amd
 
 This module will setup your programming environment with paths to software and libraries that are compatible with AMD compilers.
@@ -578,7 +578,7 @@ Exposing The ROCm Toolchain to your Programming Environment
 
 If you need to add the tools and libraries related to ROCm, the framework for targeting AMD GPUs, to your path, you will need to use a version of ROCm that is compatible with your programming environment.
 
-The following modules help you expose the ROCm Toolchain to your programming Environment: 
+The following modules help you expose the ROCm Toolchain to your programming Environment:
 
 
 +-----------------------------------+------------------------------------------+--------------------------------------------------------------+
@@ -607,11 +607,11 @@ The MPI implementation available on Frontier is Cray's MPICH, which is "GPU-awar
 |                |                |                                                     | | ``-I${MPICH_DIR}/include``                                                  |
 +----------------+----------------+-----------------------------------------------------+-------------------------------------------------------------------------------+
 
-.. note:: 
-   
+.. note::
+
     hipcc requires the ROCm Toolclain, See :ref:`exposing-the-rocm-toolchain-to-your-programming-environment`
 
-   
+
 
 GPU-Aware MPI
 ^^^^^^^^^^^^^
@@ -621,31 +621,31 @@ To use GPU-aware Cray MPICH, with Frontier's PrgEnv modules, users must set the 
 If using ``PrgEnv-amd``:
 
 .. code:: bash
-    
+
     module load craype-accel-amd-gfx90a
-    
+
     export MPICH_GPU_SUPPORT_ENABLED=1
-    
-    
-If using ``PrgEnv-cray``:   
+
+
+If using ``PrgEnv-cray``:
 
 .. code:: bash
-    
+
     module load craype-accel-amd-gfx90a
     module load amd-mixed
-    
-    export MPICH_GPU_SUPPORT_ENABLED=1    
-    
+
+    export MPICH_GPU_SUPPORT_ENABLED=1
+
 
 .. note::
 
     There are extra steps needed to enable GPU-aware MPI on Frontier, which depend on the compiler that is used (see 1. and 2. below).
-    
+
 1. Compiling with the Cray compiler wrappers, ``cc`` or ``CC``
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-When using GPU-aware Cray MPICH with the Cray compiler wrappers, most of the needed libraries are automatically linked through the environment variables. 
- 
+When using GPU-aware Cray MPICH with the Cray compiler wrappers, most of the needed libraries are automatically linked through the environment variables.
+
 Though, the following header files and libraries must be included explicitly:
 
 .. code:: bash
@@ -660,7 +660,7 @@ where the include path implies that ``#include <hip/hip_runtime.h>`` is included
 2. Compiling with ``hipcc``
 """""""""""""""""""""""""""
 
-To use ``hipcc`` with GPU-aware Cray MPICH, use the following environment variables to setup the needed header files and libraries. 
+To use ``hipcc`` with GPU-aware Cray MPICH, use the following environment variables to setup the needed header files and libraries.
 
 .. code:: bash
 
@@ -669,7 +669,7 @@ To use ``hipcc`` with GPU-aware Cray MPICH, use the following environment variab
     -L${MPICH_DIR}/lib -lmpi ${PE_MPICH_GTL_DIR_amd_gfx90a} ${PE_MPICH_GTL_LIBS_amd_gfx90a}
 
     HIPFLAGS = --amdgpu-target=gfx90a
-    
+
 
 Determining the Compatibility of Cray MPICH and ROCm
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -735,8 +735,8 @@ This section shows how to compile with OpenMP Offload using the different compil
 
 .. note::
 
-    If invoking ``amdclang``, ``amdclang++``, or ``amdflang`` directly for ``openmp offload``, or using ``hipcc`` you will need to add: 
-    
+    If invoking ``amdclang``, ``amdclang++``, or ``amdflang`` directly for ``openmp offload``, or using ``hipcc`` you will need to add:
+
     ``-fopenmp -target x86_64-pc-linux-gnu -fopenmp-targets=amdgcn-amd-amdhsa -Xopenmp-target=amdgcn-amd-amdhsa -march=gfx90a``.
 
 HIP
@@ -761,8 +761,8 @@ This section shows how to compile HIP codes using the Cray compiler wrappers and
 |                   | | To explicitly target AMD MI250X, use ``--amdgpu-target=gfx90a``                                                        |
 +-------------------+--------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: 
-   
+.. note::
+
     hipcc requires the ROCm Toolclain, See :ref:`exposing-the-rocm-toolchain-to-your-programming-environment`
 
 .. note::
@@ -794,8 +794,8 @@ This section shows how to compile HIP + OpenMP CPU threading hybrid codes.
 |          |           | | NOTE: When using ``cmake``, HIP code must currently be compiled using ``amdclang++`` instead of ``hipcc``.                      |
 +----------+-----------+-----------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: 
-   
+.. note::
+
     hipcc requires the ROCm Toolclain, See :ref:`exposing-the-rocm-toolchain-to-your-programming-environment`
 
 ----
@@ -808,7 +808,7 @@ Running Jobs
 
 Computational work on Frontier is performed by *jobs*. Jobs typically consist of several componenets:
 
--  A batch submission script 
+-  A batch submission script
 -  A binary executable
 -  A set of input files for the executable
 -  A set of output files created by the executable
@@ -826,7 +826,7 @@ The following sections describe in detail how to create, submit, and manage jobs
 Login vs Compute Nodes
 ----------------------
 
-Recall from the System Overview that Frontier contains two node types: Login and Compute. When you connect to the system, you are placed on a *login* node. Login nodes are used for tasks such as code editing, compiling, etc. They are shared among all users of the system, so it is not appropriate to run tasks that are long/computationally intensive on login nodes. Users should also limit the number of simultaneous tasks on login nodes (e.g. concurrent tar commands, parallel make 
+Recall from the System Overview that Frontier contains two node types: Login and Compute. When you connect to the system, you are placed on a *login* node. Login nodes are used for tasks such as code editing, compiling, etc. They are shared among all users of the system, so it is not appropriate to run tasks that are long/computationally intensive on login nodes. Users should also limit the number of simultaneous tasks on login nodes (e.g. concurrent tar commands, parallel make
 
 Compute nodes are the appropriate place for long-running, computationally-intensive tasks. When you start a batch job, your batch script (or interactive shell for batch-interactive jobs) runs on one of your allocated compute nodes.
 
@@ -1064,7 +1064,7 @@ A job will transition through several states during its lifetime. Common ones in
 
 +-------+------------+-------------------------------------------------------------------------------+
 | State | State      | Description                                                                   |
-| Code  |            |                                                                               | 
+| Code  |            |                                                                               |
 +=======+============+===============================================================================+
 | CA    | Canceled   | The job was canceled (could've been by the user or an administrator)          |
 +-------+------------+-------------------------------------------------------------------------------+
@@ -1215,7 +1215,7 @@ Monitoring and Modifying Batch Jobs
 Sometimes you may need to place a hold on a job to keep it from starting. For example, you may have submitted it assuming some needed data was in place but later realized that data is not yet available. This can be done with the ``scontrol hold`` command. Later, when the data is ready, you can release the job (i.e. tell the system that it's now OK to run the job) with the ``scontrol release`` command. For example:
 
 +----------------------------+------------------------------------------------------------+
-| ``scontrol hold 12345``    | Place job 12345 on hold                                    | 
+| ``scontrol hold 12345``    | Place job 12345 on hold                                    |
 +----------------------------+------------------------------------------------------------+
 | ``scontrol release 12345`` | Release job 12345 (i.e. tell the system it's OK to run it) |
 +----------------------------+------------------------------------------------------------+
@@ -1236,7 +1236,7 @@ There may also be occasions where you want to modify a job that's waiting in the
 ``scancel``: Cancel or Signal a Job
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to the ``--signal`` option for the ``sbatch``/``salloc`` commands described :ref:`above <common-slurm-options>`, the ``scancel`` command can be used to manually signal a job. Typically, this is used to remove a job from the queue. In this use case, you do not need to specify a signal and can simply provide the jobid (i.e. ``scancel 12345``). If you want to send some other signal to the job, use ``scancel`` the with the ``-s`` option. The ``-s`` option allows signals to be specified either by number or by name. Thus, if you want to send ``SIGUSR1`` to a job, you would use ``scancel -s 10 12345`` or ``scancel -s USR1 12345``. 
+In addition to the ``--signal`` option for the ``sbatch``/``salloc`` commands described :ref:`above <common-slurm-options>`, the ``scancel`` command can be used to manually signal a job. Typically, this is used to remove a job from the queue. In this use case, you do not need to specify a signal and can simply provide the jobid (i.e. ``scancel 12345``). If you want to send some other signal to the job, use ``scancel`` the with the ``-s`` option. The ``-s`` option allows signals to be specified either by number or by name. Thus, if you want to send ``SIGUSR1`` to a job, you would use ``scancel -s 10 12345`` or ``scancel -s USR1 12345``.
 
 
 ``squeue``: View the Queue
@@ -1254,7 +1254,7 @@ The ``squeue`` command is used to show the batch queue. You can filter the level
 ``sacct``: Get Job Accounting Information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``sacct`` command gives detailed information about jobs currently in the queue and recently-completed jobs. You can also use it to see the various steps within a batch jobs. 
+The ``sacct`` command gives detailed information about jobs currently in the queue and recently-completed jobs. You can also use it to see the various steps within a batch jobs.
 
 +-----------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
 | ``sacct -a -X``                                                                   | Show all jobs (``-a``) in the queue, but summarize the whole allocation instead of showing individual steps (``-X``) |
@@ -1284,7 +1284,7 @@ Srun Format
 
 ::
 
-      srun  [OPTIONS... [executable [args...]]] 
+      srun  [OPTIONS... [executable [args...]]]
 
 Single Command (non-interactive)
 
@@ -1396,7 +1396,7 @@ the following sections to check their understanding of the job steps (i.e.,
   mappings.
 
 Additionally, it may be helpful to cross reference the
-:ref:`simplified Frontier node diagram <frontier-simple>` -- specifically the 
+:ref:`simplified Frontier node diagram <frontier-simple>` -- specifically the
 :ref:`low-noise mode diagram <frontier-lownoise>`.
 
 .. warning::
@@ -1698,7 +1698,7 @@ Somewhat counterintuitively, this common test case is currently among the most
 difficult. Slurm ignores GPU bindings for nodes with only a single task, so we
 do not use ``--gpu-bind`` here. We must allocate only a single GPU to ensure
 that only one GPU is available to the task, and since we get the first GPU
-available we should bind the task to the CPU closest to the allocated GPU. 
+available we should bind the task to the CPU closest to the allocated GPU.
 
 .. code-block:: bash
 
@@ -1791,7 +1791,7 @@ ensured that the closest GPU to each rank was the one used.
    be seen in the Frontier node diagram, these two hardware threads reside in the
    same L3 cache region, and that L3 region is connected via Infinity Fabric (blue
    line in the diagram) to GPU 4. This is an important distinction that can affect
-   performance if not considered carefully. 
+   performance if not considered carefully.
 
 **Example 2: 16 MPI ranks - each with 2 OpenMP threads and 1 GPU (multi-node)**
 
@@ -1889,7 +1889,7 @@ by changing the number of nodes to 2 (``-N2``) and the number of MPI ranks to
 
     $ export OMP_NUM_THREADS=2
     $ srun -N2 -n16 -c2 --gpus-per-node=8 --gpu-bind=map_gpu:4,5,2,3,6,7,0,1 ./hello_jobstep | sort
-    
+
     MPI 000 - OMP 000 - HWT 001 - Node frontier04975 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 000 - OMP 001 - HWT 002 - Node frontier04975 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 001 - OMP 000 - HWT 009 - Node frontier04975 - RT_GPU_ID 0 - GPU_ID 5 - Bus_ID d6
@@ -2066,7 +2066,7 @@ round-robin (``cyclic``) distribution of MPI ranks across NUMA domains:
 
     $ export OMP_NUM_THREADS=1
     $ srun -N1 -n16 -c4 --ntasks-per-gpu=2 --gpu-bind=closest --distribution=*:block ./hello_jobstep | sort
-    
+
     MPI 000 - OMP 000 - HWT 000 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 001 - OMP 000 - HWT 004 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 002 - OMP 000 - HWT 008 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 5 - Bus_ID d6
@@ -2108,7 +2108,7 @@ to change to using 2 nodes (``-N2``) and 32 MPI ranks (``-n32``).
 
     $ export OMP_NUM_THREADS=1
     $ srun -N2 -n32 -c4 --ntasks-per-gpu=2 --gpu-bind=closest --distribution=*:block ./hello_jobstep | sort
-    
+
     MPI 000 - OMP 000 - HWT 000 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 001 - OMP 000 - HWT 004 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 4 - Bus_ID d1
     MPI 002 - OMP 000 - HWT 010 - Node frontier002 - RT_GPU_ID 0 - GPU_ID 5 - Bus_ID d6
@@ -2696,7 +2696,7 @@ The second example generates an instrumened executable using a ``hipcc`` build:
     module load perftools
     module load craype-accel-amd-gfx90a
     module load rocm
-    
+
     export CXX='hipcc'
     export CXXFLAGS="$(pat_opts include hipcc) \
       $(pat_opts pre_compile hipcc) -g -O3 -std=c++17 -Wall \
@@ -2707,10 +2707,10 @@ The second example generates an instrumened executable using a ``hipcc`` build:
       -L${CRAY_MPICH_DIR}/lib ${PE_MPICH_GTL_DIR_amd_gfx908}"
     export LIBS="-lmpi ${PE_MPICH_GTL_LIBS_amd_gfx908} \
       $(pat_opts post_link hipcc)"
-    
+
     make clean
     make
-    
+
     pat_build -g hip,io,mpi -w -f <executable>
 
 The ``pat_build`` command in the above examples generates an instrumented executable with ``+pat`` appended to the executable name (e.g., ``hello_jobstep+pat``).
@@ -2742,20 +2742,20 @@ Below is an example that generates a profile and loads the results in their GUI-
 
 .. code:: bash
 
-    module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64 
-    module load hpctoolkit 
-    
-    # 1. Profile and trace an application using CPU time and GPU performance counters 
-    srun <srun_options> hpcrun -o <measurement_dir> -t -e CPUTIME -e gpu=amd <application> 
+    module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
+    module load hpctoolkit
 
-    # 2. Analyze the binary of executables and its dependent libraries 
-    hpcstruct <measurement_dir> 
+    # 1. Profile and trace an application using CPU time and GPU performance counters
+    srun <srun_options> hpcrun -o <measurement_dir> -t -e CPUTIME -e gpu=amd <application>
 
-    # 3. Combine measurements with program structure information and generate a database 
-    hpcprof -o <database_dir> <measurement_dir> 
+    # 2. Analyze the binary of executables and its dependent libraries
+    hpcstruct <measurement_dir>
 
-    # 4. Understand performance issues by analyzing profiles and traces with the GUI 
-    hpcviewer <database_dir> 
+    # 3. Combine measurements with program structure information and generate a database
+    hpcprof -o <database_dir> <measurement_dir>
+
+    # 4. Understand performance issues by analyzing profiles and traces with the GUI
+    hpcviewer <database_dir>
 
 More detailed information on HPCToolkit can be found in the `HPCToolkit User's Manual <http://hpctoolkit.org/manual/HPCToolkit-users-manual.pdf>`__.
 
@@ -2970,11 +2970,11 @@ This section details 'tips and tricks' and information of interest to users when
 
 Using reduced precision (FP16 and BF16 datatypes)
 -------------------------------------------------
-Users leveraging BF16 and FP16 datatypes for applications such as ML/AI training and low-precision matrix multiplication should be aware that the AMD MI250X GPU has different denormal handling than the V100 GPUs on Summit. On the MI250X, the V_DOT2 and the matrix instructions for FP16 and BF16 flush input and output denormal values to zero. FP32 and FP64 MFMA instructions do not flush input and output denormal values to zero. 
+Users leveraging BF16 and FP16 datatypes for applications such as ML/AI training and low-precision matrix multiplication should be aware that the AMD MI250X GPU has different denormal handling than the V100 GPUs on Summit. On the MI250X, the V_DOT2 and the matrix instructions for FP16 and BF16 flush input and output denormal values to zero. FP32 and FP64 MFMA instructions do not flush input and output denormal values to zero.
 
 When training deep learning models using FP16 precision, some models may fail to converge with FP16 denorms flushed to zero. This occurs in operations encountering denormal values, and so is more likely to occur in FP16 because of a small dynamic range. BF16 numbers have a larger dynamic range than FP16 numbers and are less likely to encounter denormal values.
 
-AMD has provided a solution in ROCm 5.0 which modifies the behavior of Tensorflow, PyTorch, and rocBLAS. This modification starts with FP16 input values, casting the intermediate FP16 values to BF16, and then casting back to FP16 output after the accumulate FP32 operations. In this way, the input and output types are unchanged. The behavior is enabled by default in machine learning frameworks. This behavior requires user action in rocBLAS, via a special enum type. For more information, see the rocBLAS link below. 
+AMD has provided a solution in ROCm 5.0 which modifies the behavior of Tensorflow, PyTorch, and rocBLAS. This modification starts with FP16 input values, casting the intermediate FP16 values to BF16, and then casting back to FP16 output after the accumulate FP32 operations. In this way, the input and output types are unchanged. The behavior is enabled by default in machine learning frameworks. This behavior requires user action in rocBLAS, via a special enum type. For more information, see the rocBLAS link below.
 
 If you encounter significant differences when running using reduced precision, explore replacing non-converging models in FP16 with BF16, because of the greater dynamic range in BF16. We recommend using BF16 for ML models in general. If you have further questions or encounter issues, contact help@olcf.ornl.gov.
 
@@ -3040,13 +3040,13 @@ Most applications that use "managed" or "unified" memory on other platforms will
 +---------------------------------------------+---------------------------+--------------------------------------------+----------------------------------------------------+
 | hipMalloc                                   | GPU HBM                   | Zero copy read/write over Inifinity Fabric | Local read/write                                   |
 +---------------------------------------------+---------------------------+--------------------------------------------+----------------------------------------------------+
-   
+
 Disabling XNACK will not necessarily result in an application failure, as most types of memory can still be accessed by the AMD "Optimized 3rd Gen EPYC" CPU and AMD MI250X GPU. In most cases, however, the access will occur in a zero-copy fashion over the Infinity Fabric. The exception is memory allocated through standard system allocators such as ``malloc``, which cannot be accessed directly from GPU kernels without previously being registered via a HIP runtime call such as ``hipHostRegister``. Access to malloc'ed and unregistered memory from GPU kernels will result in fatal unhandled page faults. The table below shows how common allocators behave with XNACK disabled.
 
 ``HSA_XNACK=0`` **Automatic Page Migration Disabled**
 
 +---------------------------------------------+---------------------------+--------------------------------------------+---------------------------------------------+
-| Allocator                                   | Initial Physical Location | Default Behavior for CPU Access            | Default Behavior for GPU Access             | 
+| Allocator                                   | Initial Physical Location | Default Behavior for CPU Access            | Default Behavior for GPU Access             |
 +=============================================+===========================+============================================+=============================================+
 | System Allocator (malloc,new,allocate, etc) | CPU DDR4                  | Local read/write                           | Fatal Unhandled Page Fault                  |
 +---------------------------------------------+---------------------------+--------------------------------------------+---------------------------------------------+
@@ -3110,7 +3110,7 @@ If the HIP runtime cannot find a kernel image that matches the XNACK mode of the
 One way to diagnose ``hipErrorNoBinaryForGpu`` messages is to set the environment variable ``AMD_LOG_LEVEL`` to 1 or greater:
 
 .. code::
-    
+
     $ AMD_LOG_LEVEL=1 HSA_XNACK=0 srun -n 1 -N 1 -t 1 ./xnack_plus.exe
     :1:rocdevice.cpp            :1573: 43966598070 us: HSA_AMD_AGENT_INFO_SVM_DIRECT_HOST_ACCESS query failed.
     :1:rocdevice.cpp            :1573: 43966598762 us: HSA_AMD_AGENT_INFO_SVM_DIRECT_HOST_ACCESS query failed.
